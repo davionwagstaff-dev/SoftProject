@@ -1,0 +1,42 @@
+/* Logan */
+.scrollWheel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 1rem;
+  gap: 1rem;
+  background: #f8f8f8;
+  border-bottom: 2px solid #ddd;
+}
+
+.category {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  text-align: center;
+  width: 100px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.category img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.category span {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.category:hover {
+  transform: scale(1.1);
+}
+.category:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+}
+
+/* Logan */
