@@ -1,0 +1,119 @@
+/* Davion - SignUp and Login */
+body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to  right, #333,#00c6ff, #0078ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      width: 350px;
+      text-align: center;
+      transition: 0.3s ease;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 95%;
+      padding: 10px;
+      background: #4facfe;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #00c6ff;
+    }
+
+    .toggle {
+      color: #0078ff;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .message {
+      margin-top: 10px;
+      color: green;
+      font-weight: bold;
+    }
+
+    .error {
+      color: red;
+    }
+    #img {
+        height: 200px;
+        justify-content: center;
+    }
+/* Davion - SignUp and Login */
+
+/* Logan */
+.scrollWheel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 1rem;
+  gap: 1rem;
+  background: #f8f8f8;
+  border-bottom: 2px solid #ddd;
+}
+
+.category {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  text-align: center;
+  width: 100px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.category img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.category span {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.category:hover {
+  transform: scale(1.1);
+}
+.category:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+}
+
+/* Logan */
+
+/* John - Rewards */
+
+#rewardsHeader img{
+  height: 200px;
+}
+
+/* John */
