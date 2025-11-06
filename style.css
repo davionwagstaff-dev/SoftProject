@@ -1,4 +1,9 @@
 /* Davion - SignUp and Login */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body {
       font-family: Arial, sans-serif;
       background: linear-gradient(to  right, #333,#00c6ff, #0078ff);
@@ -109,11 +114,3 @@ body {
 }
 
 /* Logan */
-
-/* John - Rewards */
-
-#rewardsHeader img{
-  height: 200px;
-}
-
-/* John */

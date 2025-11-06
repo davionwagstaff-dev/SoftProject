@@ -1,0 +1,35 @@
+/* John - Rewards */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background: linear-gradient(to  right, #333,#00c6ff, #0078ff);
+}
+#rewardsHeader {
+    display: flex;
+    background-color: black;
+}
+#rewardsHeader img{
+    height: 10vh;
+}
+#rewardsDesc{
+    background-color: beige;
+    font-size: 1.5em;
+    padding: 20px;
+}
+#pointSection{
+    background-color: lightgray;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 15px;
+}
+#pointHeader{
+    
+}
+#pointCount{
+
+}
+
+/* John */
