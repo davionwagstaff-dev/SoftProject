@@ -19,17 +19,17 @@ body {
     font-size: 1.5em;
     padding: 20px;
 }
+#rewardsDesc p{
+    margin-top: 15px;
+    line-height: 1.5em;
+}
 #pointSection{
     background-color: lightgray;
     margin: 20px;
     padding: 20px;
     border-radius: 15px;
-}
-#pointHeader{
-    
-}
-#pointCount{
-
+    width: 25%;
+    justify-self: right;
 }
 
 /* John */
