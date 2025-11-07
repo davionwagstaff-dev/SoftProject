@@ -1,4 +1,9 @@
 /* Logan */
+
+body{
+background-color: #1a1a80;
+
+}
 .scrollWheel {
   display: flex;
   overflow-x: auto;
@@ -37,6 +42,14 @@
 .category:hover {
   transform: scale(1.1);
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+}
+#rewardsHeader {
+    display: flex;
+    background-color: black;
+    background: linear-gradient(to right, #000000, #1a1a80, #2f2f2f, #636363, #7f7f7f, #979494);
+}
+#rewardsHeader img{
+    height: 10vh;
 }
 
 /* Logan */
