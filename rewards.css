@@ -14,10 +14,15 @@ body {
 #rewardsHeader img{
     height: 10vh;
 }
+.rewardsContent{
+    text-align: center;
+}
 #rewardsDesc{
     background-color: beige;
     font-size: 1.5em;
     padding: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 #rewardsDesc p{
     margin-top: 15px;
@@ -29,7 +34,7 @@ body {
     padding: 20px;
     border-radius: 15px;
     width: 25%;
-    justify-self: right;
+    justify-self: center;
 }
 
 /* John */
