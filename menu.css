@@ -104,3 +104,85 @@ body {
   transform: scale(1.03);
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
+body {
+    /* Add padding to the body so content doesn't hide behind the fixed navbar */
+    padding-top: 80px; /* Adjust based on navbar height */
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/* --- Navigation Bar Styling --- */
+.navbar {
+    background-color: #333; 
+    color: white;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 20px;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box; 
+    z-index: 1000; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar #img {
+    height: 50px; 
+    width: auto;
+}
+
+.navbar ul {
+    list-style-type: none; 
+    margin: 0;
+    padding: 0;
+    display: flex; 
+    gap: 20px; 
+}
+.navbar li a {
+    color: white;
+    text-decoration: none; 
+    padding: 10px 15px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
+}
+
+.navbar li a:hover,
+.navbar li a.active { 
+    background-color: #ddd; 
+    color: #333; 
+}
+
+
+.scrollWheel {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px 0;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ddd;
+}
+
+.category {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.featuredItems {
+    padding: 20px;
+}
+
+.itemGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.menuItem {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
