@@ -1,5 +1,3 @@
-
-
 body {
   background-color: #1a1a80;
   margin: 0;
@@ -9,16 +7,16 @@ body {
 
 #rewardsHeader {
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: left;
   padding: 1rem;
   background: linear-gradient(to right, #000000, #1a1a80, #2f2f2f, #636363, #7f7f7f, #979494);
 }
+
 #rewardsHeader img {
   height: 10vh;
   max-height: 80px;
 }
-
 
 .scrollWheel {
   display: flex;
@@ -29,6 +27,7 @@ body {
   background: #f8f8f8;
   border-bottom: 2px solid #ddd;
 }
+
 .category {
   flex: 0 0 auto;
   scroll-snap-align: start;
@@ -37,17 +36,20 @@ body {
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .category img {
   width: 60px;
   height: 60px;
   object-fit: contain;
   margin-bottom: 0.5rem;
 }
+
 .category span {
   font-size: 0.85rem;
   font-weight: bold;
   color: #333;
 }
+
 .category:hover {
   transform: scale(1.1);
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
@@ -57,6 +59,7 @@ body {
   padding: 2rem;
   background-color: #2f2f2f;
 }
+
 .featuredItems h2 {
   text-align: center;
   font-size: 2rem;
@@ -64,12 +67,12 @@ body {
   color: #ffcc00;
 }
 
-
 .itemGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
 }
+
 .menuItem {
   background-color: #1a1a80;
   border-radius: 8px;
@@ -78,6 +81,7 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid #444;
 }
+
 .menuItem img {
   width: 100%;
   height: 150px;
@@ -85,22 +89,52 @@ body {
   border-radius: 6px;
   margin-bottom: 0.75rem;
 }
+
 .menuItem h3 {
   font-size: 1.2rem;
   margin: 0.5rem 0;
   color: #ffcc00;
 }
+
 .menuItem p {
   font-size: 0.9rem;
   color: #ddd;
 }
+
 .menuItem .price {
   display: block;
   margin-top: 0.5rem;
   font-weight: bold;
   color: #00ffcc;
 }
+
 .menuItem:hover {
   transform: scale(1.03);
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
+
+.menuBox{
+  margin: 2rem;
+  padding: 1.5rem;
+  background-color: #2f2f2f;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  border: 1px solid #444;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menuCategories{
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #ffcc00;
+  text-align: center;
+  border-bottom: 2px solid #ffcc00;
+  padding-bottom: 0.5rem;
+  transform: scale(1.01);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+html {
+  scroll-behavior: smooth;
+}
+
+
