@@ -56,4 +56,3 @@ const title = document.getElementById("form-title");
       message.className = isError ? "message error" : "message";
     }
 //Davion - SignUp and Login//
-
