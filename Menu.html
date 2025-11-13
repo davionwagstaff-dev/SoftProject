@@ -1,85 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grillzilla Menu</title>
-<link rel="stylesheet" href="menu.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grillzilla Menu</title>
+  <link rel="stylesheet" href="menu.css" />
 </head>
 <body>
-   <nav class="navbar">
-    <img id="img" src="Images/ChatGPT Image Nov 6, 2025 at 08_18_14 AM.png" alt="">
-        <ul>
-            <li><a href="">Cart</a></li>
-            <li><a href="Menu.html">Menu</a></li>
-            <li><a href="index.html">Sign Up</a></li>
-            <li><a href="Rewards.html">Rewards</a></li>
-        </ul>
-    </nav>
-  <!-- logan -->
+  <nav class="navbar">
+    <img id="img" src="Images/ChatGPT Image Nov 6, 2025 at 08_18_14 AM.png" alt="" />
+    <ul>
+      <li><a href="">Cart</a></li>
+      <li><a href="Menu.html">Menu</a></li>
+      <li><a href="index.html">Sign Up</a></li>
+      <li><a href="Rewards.html">Rewards</a></li>
+    </ul>
+  </nav>
+
   <div class="scrollWheel">
-    <div class="category"><img src="Apps.png" alt=""><span>Appetizers</span></div>
-    <div class="category"><img src="wing" alt=""><span>Chicken Wings</span></div>
-    <div class="category"><img src="kids" alt=""><span>Kids Meals</span></div>
-    <div class="category"><img src="entrees" alt=""><span>Entrées</span></div>
-    <div class="category"><img src="salads" alt=""><span>Salads</span></div>
-    <div class="category"><img src="burgers" alt=""><span>Tavern Burgers</span></div>
-    <div class="category"><img src="veggaSaurus" alt=""><span>Veggie </span></div>
-    <div class="category"><img src="family" alt=""><span>Family Deals</span></div>
-    <div class="category"><img src="desserts" alt=""><span>Desserts</span></div>
-    <div class="category"><img src="drinks" alt=""><span>Drinks</span></div>
-    <div class="category"><img src="sides" alt=""><span>Sides</span></div>
-    <div class="category"><img src="soups" alt=""><span>Soups</span></div>
-    <div class="category"><img src="seafood" alt=""><span>Seafood</span></div>
-    <div class="category"><img src="bbq" alt=""><span>BBQ Specials</span></div>
-    <div class="category"><img src="breakfast" alt=""><span>Breakfast</span></div>
+    <div class="category" data-target="appetizers"><img src="Apps.png" alt=""><span>Appetizers</span></div>
+    <div class="category" data-target="wings"><img src="wing" alt=""><span>Chicken Wings</span></div>
+    <div class="category" data-target="kids"><img src="kids" alt=""><span>Kids Meals</span></div>
+    <div class="category" data-target="entrees"><img src="entrees" alt=""><span>Entrées</span></div>
+    <div class="category" data-target="salads"><img src="salads" alt=""><span>Salads</span></div>
+    <div class="category" data-target="burgers"><img src="burgers" alt=""><span>Tavern Burgers</span></div>
+    <div class="category" data-target="veggie"><img src="veggaSaurus" alt=""><span>Veggie</span></div>
+    <div class="category" data-target="family"><img src="family" alt=""><span>Family Deals</span></div>
+    <div class="category" data-target="desserts"><img src="desserts" alt=""><span>Desserts</span></div>
+    <div class="category" data-target="drinks"><img src="drinks" alt=""><span>Drinks</span></div>
+    <div class="category" data-target="sides"><img src="sides" alt=""><span>Sides</span></div>
+    <div class="category" data-target="soups"><img src="soups" alt=""><span>Soups</span></div>
+    <div class="category" data-target="seafood"><img src="seafood" alt=""><span>Seafood</span></div>
+    <div class="category" data-target="bbq"><img src="bbq" alt=""><span>BBQ Specials</span></div>
+    <div class="category" data-target="breakfast"><img src="breakfast" alt=""><span>Breakfast</span></div>
   </div>
 
-<section class="featuredItems">
-  <h2>🔥 Featured Dishes</h2>
-  <div class="itemGrid">
-    <div class="menuItem" onclick="openModal('brisket')">
-      <img src="Brisket sammy.jpg" alt="">
-      <h3>Smoked Brisket</h3>
-      <p>
-        Slow-smoked to perfection, our tender brisket is stacked high on a toasted 
-        bun and topped with tangy BBQ sauce, crispy onions, and a hint of house-made
-         slaw. It's bold, juicy, and packed with smoky goodness in every bite.
-      </p>
-      <span class="price">$15.99</span>
+  <section class="featuredItems">
+    <h2>🔥 Featured Dishes</h2>
+    <div class="itemGrid">
+      <div class="menuItem" onclick="openModal('brisket')">
+        <img src="Brisket sammy.jpg" alt="">
+        <h3>Smoked Brisket</h3>
+        <p>Slow-smoked to perfection, our tender brisket is stacked high on a toasted bun and topped with tangy BBQ sauce, crispy onions, and a hint of house-made slaw.</p>
+        <span class="price">$15.99</span>
+      </div>
+      <div class="menuItem" onclick="openModal('loadedFries')">
+        <img src="Loaded.webp" alt="">
+        <h3>Loaded Fries</h3>
+        <p>Golden, crispy fries piled high and smothered in melted cheddar, smoky bacon bits, and a drizzle of zesty ranch.</p>
+        <span class="price">$8.99</span>
+      </div>
+      <div class="menuItem" onclick="openModal('veggieWrap')">
+        <img src="Veggie.jpg" alt="">
+        <h3>Veggie Wrap</h3>
+        <p>A vibrant medley of crisp lettuce, juicy tomatoes, shredded carrots, and crunchy cucumbers wrapped in a soft tortilla.</p>
+        <span class="price">$4.99</span>
+      </div>
     </div>
-    <div class="menuItem" onclick="openModal('loadedFries')">
-      <img src="Loaded.webp" alt="">
-      <h3>Loaded Fries</h3>
-      <p>
-        Golden, crispy fries piled high and smothered in melted cheddar,
-         smoky bacon bits, and a drizzle of zesty ranch. Finished with 
-         fresh scallions and a kick of seasoning, these loaded fries are the
-          ultimate comfort food with attitude.
-      </p>
-      <span class="price">$8.99</span>
+  </section>
+
+
+
+  <section id="appetizers" class="menuSection hidden">
+    <h2>Appetizers</h2>
+    <div class="itemGrid">
+      <div class="menuItem">
+        <img src="meatballs.jpg" alt="Meatballs">
+        <h3>Meatballs</h3>
+        <p>Juicy meatballs in marinara sauce.</p>
+        <span class="price">$6.99</span>
+      </div>
+      <div class="menuItem">
+        <img src="calamari.jpg" alt="Fried Calamari">
+        <h3>Fried Calamari</h3>
+        <p>Lightly breaded and crispy.</p>
+        <span class="price">$8.99</span>
+      </div>
     </div>
-    <div class="menuItem" onclick="openModal('veggieWrap')">
-      <img src="Veggie.jpg" alt="">
-      <h3>Veggie Wrap</h3>
-      
-    <p>
-      A vibrant medley of crisp lettuce, juicy tomatoes, shredded carrots, 
-      and crunchy cucumbers wrapped in a soft tortilla, finished with a drizzle
-       of tangy house dressing. Its a garden-fresh bite thats perfect for a lighter craving.
-    </p>
-      <span class="price">$4.99</span>
-</section>
-<section class="nutritionNotice">
-  <p>
-    2000 calories a day is used for general nutrition advice, but calorie needs vary. 1,200 to 1,400 calories a day is used for general nutrition advice for children ages 4–8 years, and 1,400 to 2,000 calories a day for children ages 9–13 years, but calorie needs vary. Additional nutrition information available upon request.
-  </p>
-  <p class="note">
-    *Prepared in a common kitchen alongside items containing gluten.
-  </p>
-  <p class="note">
-    Fried items may be prepared in the same frying oil as menu items containing animal ingredients. We cannot guarantee that cross-contact with animal ingredients will not occur.
-  </p>
-</section>
+  </section>
+
+  <section id="wings" class="menuSection hidden">
+    <h2>Chicken Wings</h2>
+    <div class="itemGrid">
+  
+    </div>
+  </section>
+  
+
+  <section class="nutritionNotice">
+    <p>2000 calories a day is used for general nutrition advice, but calorie needs vary.</p>
+    <p class="note">*Prepared in a common kitchen alongside items containing gluten.</p>
+    <p class="note">Fried items may be prepared in the same frying oil as menu items containing animal ingredients.</p>
+  </section>
+
+  <!-- Link to JS -->
+  <script src="menu.js"></script>
 </body>
 </html>
