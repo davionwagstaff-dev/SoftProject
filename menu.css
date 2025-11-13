@@ -3,7 +3,9 @@ body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #fff;
+  padding-top: 80px; 
 }
+
 
 #rewardsHeader {
   display: flex;
