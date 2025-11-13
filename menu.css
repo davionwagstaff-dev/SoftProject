@@ -113,13 +113,12 @@ body {
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 body {
-    /* Add padding to the body so content doesn't hide behind the fixed navbar */
-    padding-top: 80px; /* Adjust based on navbar height */
+
     margin: 0;
     font-family: sans-serif;
 }
 
-/* --- Navigation Bar Styling --- */
+
 .navbar {
     background-color: #333; 
     color: white;
@@ -193,4 +192,18 @@ body {
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nutritionNotice p {
+  margin-bottom: 1rem;
+}
+
+.nutritionNotice .warning {
+  color: #ff6666;
+  font-weight: bold;
+}
+
+.nutritionNotice .note {
+  color: #ccc;
+  font-style: italic;
 }
