@@ -3,21 +3,50 @@ body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #fff;
-  padding-top: 80px; 
+  padding-top: 80px;
 }
 
-
-#rewardsHeader {
+.navbar {
+  background-color: #333;
+  color: white;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: left;
-  padding: 1rem;
-  background: linear-gradient(to right, #000000, #1a1a80, #2f2f2f, #636363, #7f7f7f, #979494);
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-#rewardsHeader img {
-  height: 10vh;
-  max-height: 80px;
+.navbar #img {
+  height: 50px;
+  width: auto;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar li a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 4px;
+}
+
+.navbar li a:hover,
+.navbar li a.active {
+  background-color: #ddd;
+  color: #333;
 }
 
 .scrollWheel {
@@ -114,86 +143,37 @@ body {
   transform: scale(1.03);
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
-body {
 
-    margin: 0;
-    font-family: sans-serif;
+/* 🔥 Enhanced Hidden Menu Sections */
+.menuSection {
+  background-color: #2f2f2f;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  max-width: 1200px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  transform: scale(1);
 }
 
-
-.navbar {
-    background-color: #333; 
-    color: white;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 10px 20px;
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    box-sizing: border-box; 
-    z-index: 1000; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+.menuSection.hidden {
+  display: none;
+  opacity: 0;
+  transform: scale(0.95);
 }
 
-.navbar #img {
-    height: 50px; 
-    width: auto;
+.menuSection h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #ffcc00;
 }
 
-.navbar ul {
-    list-style-type: none; 
-    margin: 0;
-    padding: 0;
-    display: flex; 
-    gap: 20px; 
-}
-.navbar li a {
-    color: white;
-    text-decoration: none; 
-    padding: 10px 15px;
-    transition: background-color 0.3s, color 0.3s;
-    border-radius: 4px;
-}
-
-.navbar li a:hover,
-.navbar li a.active { 
-    background-color: #ddd; 
-    color: #333; 
-}
-
-
-.scrollWheel {
-    display: flex;
-    overflow-x: auto;
-    padding: 10px 0;
-    background-color: #f8f8f8;
-    border-bottom: 1px solid #ddd;
-}
-
-.category {
-    flex: 0 0 auto;
-    text-align: center;
-    padding: 0 15px;
-    cursor: pointer;
-}
-
-.featuredItems {
-    padding: 20px;
-}
-
-.itemGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.menuItem {
-    border: 1px solid #ccc;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.menuSection .itemGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
 }
 
 .nutritionNotice p {
@@ -208,7 +188,4 @@ body {
 .nutritionNotice .note {
   color: #ccc;
   font-style: italic;
-}
-.hidden {
-  display: none;
 }
