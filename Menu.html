@@ -6,6 +6,15 @@
   <title>Grillzilla Menu</title>
   <link rel="stylesheet" href="menu.css" />
 </head>
+<div id="cartBox" class="cartBox" style="display:none;">
+  <h2>Your Cart</h2>
+  <div id="cartItems"></div>
+
+  <h3>Total: <span id="cartTotal">$0.00</span></h3>
+
+  <button onclick="checkout()" class="checkoutBtn">Checkout</button>
+  <button onclick="closeCart()" class="closeCartBtn">Close</button>
+</div>
 <body>
   <nav class="navbar">
     <img id="img" src="Images/ChatGPT Image Nov 6, 2025 at 08_18_14 AM.png" alt="" />
