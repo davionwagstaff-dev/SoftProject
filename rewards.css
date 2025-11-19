@@ -7,6 +7,49 @@
 body {
     background: linear-gradient(to  right, #333,#00c6ff, #0078ff);
 }
+/* --- Navigation Bar Styling --- */
+.navbar {
+    background-color: #333; 
+    color: white;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 20px;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box; 
+    z-index: 1000; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar #img {
+    height: 50px; 
+    width: auto;
+}
+
+.navbar ul {
+    list-style-type: none; 
+    margin: 0;
+    padding: 0;
+    display: flex; 
+    gap: 20px; 
+}
+.navbar li a {
+    color: white;
+    text-decoration: none; 
+    padding: 10px 15px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
+}
+
+.navbar li a:hover,
+.navbar li a.active { 
+    background-color: #ddd; 
+    color: #333; 
+}
+
 #rewardsHeader {
     display: flex;
     background-color: black;
@@ -38,33 +81,47 @@ body {
     width: fit-content;
     justify-self: center;
 }
-#rewardChoices{
-    display: flex;
-    flex-wrap: wrap;
-    margin: auto;
-    text-align: center;
-}
+
 #rewardHead{
     margin: auto;
     background-color: lightgray;
     padding: 10px;
     width: fit-content;
 }
+#rewardChoices{
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
 .reward{
     display: inline-block;
     background-color: lightgray;
     width: 25%;
-    margin: auto;
+    margin-left: auto;
+    margin-top: 1%;
     padding: 15px;
     border-radius: 10px;
     text-align: center;
+    align-items: center;
 }
-footer {
+.redeemButton{
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+#rewardFooter {
     background-color: black;
     color: white;
     text-align: center;
     padding: 10px 0;
-    position: fixed;
     bottom: 0;
     width: 100%;
 }
