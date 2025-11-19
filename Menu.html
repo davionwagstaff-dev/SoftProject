@@ -1,126 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grillzilla Menu</title>
-<link rel="stylesheet" href="menu.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grillzilla Menu</title>
+  <link rel="stylesheet" href="menu.css" />
 </head>
+<div id="cartBox" class="cartBox" style="display:none;">
+  <h2>Your Cart</h2>
+  <div id="cartItems"></div>
+
+  <h3>Total: <span id="cartTotal">$0.00</span></h3>
+
+  <button onclick="checkout()" class="checkoutBtn">Checkout</button>
+  <button onclick="closeCart()" class="closeCartBtn">Close</button>
+</div>
 <body>
-   <nav class="navbar">
-    <img id="img" src="Images/ChatGPT Image Nov 6, 2025 at 08_18_14 AM.png" alt="">
-        <ul>
-            <li><a href="">Cart</a></li>
-            <li><a href="Menu.html">Menu</a></li>
-            <li><a href="index.html">Sign Up</a></li>
-        </ul>
-    </nav>
-  <!-- logan -->
+  <nav class="navbar">
+    <img id="img" src="Images/ChatGPT Image Nov 6, 2025 at 08_18_14 AM.png" alt="" />
+    <ul>
+      <li><a href="">Cart</a></li>
+      <li><a href="Menu.html">Menu</a></li>
+      <li><a href="index.html">Sign Up</a></li>
+      <li><a href="Rewards.html">Rewards</a></li>
+    </ul>
+  </nav>
+
   <div class="scrollWheel">
-    <div class="category"><img src="Apps.png" alt=""><span>Appetizers</span></div>
-    <div class="category"><img src="wing" alt=""><span>Chicken Wings</span></div>
-    <div class="category"><img src="kids" alt=""><span>Kids Meals</span></div>
-    <div class="category"><img src="entrees" alt=""><span>Entrées</span></div>
-    <div class="category"><img src="salads" alt=""><span>Salads</span></div>
-    <div class="category"><img src="burgers" alt=""><span>Tavern Burgers</span></div>
-    <div class="category"><img src="veggaSaurus" alt=""><span>Veggie </span></div>
-    <div class="category"><img src="family" alt=""><span>Family Deals</span></div>
-    <div class="category"><img src="desserts" alt=""><span>Desserts</span></div>
-    <div class="category"><img src="drinks" alt=""><span>Drinks</span></div>
-    <div class="category"><img src="sides" alt=""><span>Sides</span></div>
-    <div class="category"><img src="soups" alt=""><span>Soups</span></div>
-    <div class="category"><img src="seafood" alt=""><span>Seafood</span></div>
-    <div class="category"><img src="bbq" alt=""><span>BBQ Specials</span></div>
-    <div class="category"><img src="breakfast" alt=""><span>Breakfast</span></div>
+    <div class="category" data-target="appetizers"><img src="Apps.png" alt=""><span>Appetizers</span></div>
+    <div class="category" data-target="wings"><img src="wing" alt=""><span>Chicken Wings</span></div>
+    <div class="category" data-target="kids"><img src="kids" alt=""><span>Kids Meals</span></div>
+    <div class="category" data-target="entrees"><img src="entrees" alt=""><span>Entrées</span></div>
+    <div class="category" data-target="salads"><img src="salads" alt=""><span>Salads</span></div>
+    <div class="category" data-target="burgers"><img src="burgers" alt=""><span>Tavern Burgers</span></div>
+    <div class="category" data-target="veggie"><img src="veggaSaurus" alt=""><span>Veggie</span></div>
+    <div class="category" data-target="family"><img src="family" alt=""><span>Family Deals</span></div>
+    <div class="category" data-target="desserts"><img src="desserts" alt=""><span>Desserts</span></div>
+    <div class="category" data-target="drinks"><img src="drinks" alt=""><span>Drinks</span></div>
+    <div class="category" data-target="sides"><img src="sides" alt=""><span>Sides</span></div>
+    <div class="category" data-target="soups"><img src="soups" alt=""><span>Soups</span></div>
+    <div class="category" data-target="seafood"><img src="seafood" alt=""><span>Seafood</span></div>
+    <div class="category" data-target="bbq"><img src="bbq" alt=""><span>BBQ Specials</span></div>
+    <div class="category" data-target="breakfast"><img src="breakfast" alt=""><span>Breakfast</span></div>
   </div>
 
-<section class="featuredItems">
-  <h2>🔥 Featured Dishes</h2>
+  <section class="featuredItems">
+    <h2>🔥 Featured Dishes</h2>
+    <div class="itemGrid">
+      <div class="menuItem" onclick="openModal('brisket')">
+        <img src="Brisket sammy.jpg" alt="">
+        <h3>Smoked Brisket</h3>
+        <p>Slow-smoked to perfection, our tender brisket is stacked high on a toasted bun and topped with tangy BBQ sauce, crispy onions, and a hint of house-made slaw.</p>
+        <span class="price">$15.99</span>
+      </div>
+      <div class="menuItem" onclick="openModal('loadedFries')">
+        <img src="Loaded.webp" alt="">
+        <h3>Loaded Fries</h3>
+        <p>Golden, crispy fries piled high and smothered in melted cheddar, smoky bacon bits, and a drizzle of zesty ranch.</p>
+        <span class="price">$8.99</span>
+      </div>
+      <div class="menuItem" onclick="openModal('veggieWrap')">
+        <img src="Veggie.jpg" alt="">
+        <h3>Veggie Wrap</h3>
+        <p>A vibrant medley of crisp lettuce, juicy tomatoes, shredded carrots, and crunchy cucumbers wrapped in a soft tortilla.</p>
+        <span class="price">$4.99</span>
+      </div>
+    </div>
+  </section>
+
+
+
+ <section id="appetizers" class="menuSection hidden">
+  <h2>Appetizers</h2>
   <div class="itemGrid">
-    <div class="menuItem" onclick="openModal('brisket')">
-      <img src="Brisket sammy.jpg" alt="">
-      <h3>Smoked Brisket</h3>
-      <p>
-        Slow-smoked to perfection, our tender brisket is stacked high on a toasted 
-        bun and topped with tangy BBQ sauce, crispy onions, and a hint of house-made
-         slaw. It's bold, juicy, and packed with smoky goodness in every bite.
-      </p>
-      <span class="price">$15.99</span>
-    </div>
-    <div class="menuItem" onclick="openModal('loadedFries')">
-      <img src="Loaded.webp" alt="">
-      <h3>Loaded Fries</h3>
-      <p>
-        Golden, crispy fries piled high and smothered in melted cheddar,
-         smoky bacon bits, and a drizzle of zesty ranch. Finished with 
-         fresh scallions and a kick of seasoning, these loaded fries are the
-          ultimate comfort food with attitude.
-      </p>
-      <span class="price">$8.99</span>
-    </div>
-    <div class="menuItem" onclick="openModal('veggieWrap')">
-      <img src="Veggie.jpg" alt="">
-      <h3>Veggie Wrap</h3>
-      
-    <p>
-      A vibrant medley of crisp lettuce, juicy tomatoes, shredded carrots, 
-      and crunchy cucumbers wrapped in a soft tortilla, finished with a drizzle
-       of tangy house dressing. Its a garden-fresh bite thats perfect for a lighter craving.
-    </p>
-      <span class="price">$4.99</span>
+    <div class="menuItem"><img src="" alt="Meatballs"><h3>Meatballs</h3><p>Juicy meatballs in marinara sauce.</p><span class="price">$6.99</span></div>
+    <div class="menuItem"><img src="" alt="Fried Calamari"><h3>Fried Calamari</h3><p>Lightly breaded and crispy.</p><span class="price">$8.99</span></div>
+    <div class="menuItem"><img src="" alt="Loaded Nachos"><h3>Loaded Nachos</h3><p>Cheesy nachos with jalapeños and beef.</p><span class="price">$7.49</span></div>
+    <div class="menuItem"><img src="" alt="Soft Pretzels"><h3>Soft Pretzels</h3><p>Warm pretzels with beer cheese dip.</p><span class="price">$5.99</span></div>
+  </div>
 </section>
 
- <section id="menuCategories">
-  <div class="menuBox" id="appetizers">
-    <h2>🧀 Appetizers</h2>
-    <div class="itemGrid">
-      <div class="menuItem">
-        <img src="MozzarellaSticks.jpg" alt="">
-        <h3>Mozzarella Sticks</h3>
-        <p>Fried cheese sticks with marinara sauce.</p>
-        <span class="price">$6.99</span>
-      </div>
-      <div class="menuItem">
-        <img src="Nachos.jpg" alt="">
-        <h3>Loaded Nachos</h3>
-        <p>Chips topped with cheese, jalapeños, salsa, and sour cream.</p>
-        <span class="price">$7.99</span>
-      </div>
-      <div class="menuItem">
-        <img src="PotatoSkins.jpg" alt="">
-        <h3>Loaded Potato Skins</h3>
-        <p>Crispy skins with cheddar, bacon, scallions, and sour cream.</p>
-        <span class="price">$6.49</span>
-      </div>
-      <div class="menuItem">
-        <img src="QuesoDip.jpg" alt="">
-        <h3>Queso Dip</h3>
-        <p>Warm cheese dip with jalapeños and tortilla chips.</p>
-        <span class="price">$5.99</span>
-      </div>
-      <div class="menuItem">
-        <img src="ChickenSliders.jpg" alt="">
-        <h3>BBQ Chicken Sliders</h3>
-        <p>Mini buns filled with smoky pulled chicken and slaw.</p>
-        <span class="price">$8.49</span>
-      </div>
-      <div class="menuItem">
-        <img src="Wings.jpg" alt="">
-        <h3>Grillzilla Wings</h3>
-        <p>Classic wings tossed in your choice of sauce.</p>
-        <span class="price">$9.99</span>
-      </div>
-      <div class="menuItem">
-        <img src="Empanadas.jpg" alt="">
-        <h3>Beef Empanadas</h3>
-        <p>Golden pastry filled with seasoned ground beef.</p>
-        <span class="price">$7.49</span>
-      </div>
-      <div class="menuItem">
-        <img src="SpringRolls.jpg" alt="">
-        <h3>Veggie Spring Rolls</h3>
-        <p>Fresh vegetables wrapped and served with sweet chili sauce.</p>
-        <span class="price">$6.29</span>
-      </div>
-     
+<section id="wings" class="menuSection hidden">
+  <h2>Chicken Wings</h2>
+  <div class="itemGrid">
+    <div class="menuItem"><img src="" alt="Buffalo Wings"><h3>Buffalo Wings</h3><p>Classic spicy buffalo sauce.</p><span class="price">$9.99</span></div>
+    <div class="menuItem"><img src="" alt="BBQ Wings"><h3>BBQ Wings</h3><p>Sweet and smoky barbecue glaze.</p><span class="price">$9.99</span></div>
+    <div class="menuItem"><img src="" alt="Garlic Parmesan Wings"><h3>Garlic Parmesan Wings</h3><p>Rich garlic butter and parmesan.</p><span class="price">$10.49</span></div>
+    <div class="menuItem"><img src="" alt="Mango Habanero Wings"><h3>Mango Habanero Wings</h3><p>Sweet heat with tropical flair.</p><span class="price">$10.99</span></div>
+  </div>
 </section>
+
+
+
+<section id="kids" class="menuSection hidden">
+  <h2>Kids Meals</h2>
+  <div class="itemGrid">
+    <div class="menuItem"><img src="" alt="Kids Burger"><h3>Kids Burger</h3><p>Mini cheeseburger with fries.</p><span class="price">$5.99</span></div>
+    <div class="menuItem"><img src="" alt="Mac & Cheese"><h3>Mac & Cheese</h3><p>Classic creamy elbow pasta.</p><span class="price">$4.99</span></div>
+    <div class="menuItem"><img src="" alt="Chicken Tenders"><h3>Chicken Tenders</h3><p>Three crispy tenders with dip.</p><span class="price">$6.49</span></div>
+    <div class="menuItem"><img src="" alt="Grilled Cheese"><h3>Grilled Cheese</h3><p>Golden toast with melted cheddar.</p><span class="price">$4.99</span></div>
+  </div>
+</section>
+
+
+  <section id="entrees" class="menuSection hidden">
+  <h2>Entrées</h2>
+  <div class="itemGrid">
+    <div class="menuItem"><img src="" alt="Grilled Steak"><h3>Grilled Steak</h3><p>8oz sirloin with herb butter.</p><span class="price">$14.99</span></div>
+    <div class="menuItem"><img src="" alt="Chicken Alfredo"><h3>Chicken Alfredo</h3><p>Creamy pasta with grilled chicken.</p><span class="price">$12.49</span></div>
+    <div class="menuItem"><img src="" alt="BBQ Ribs"><h3>BBQ Ribs</h3><p>Fall-off-the-bone pork ribs.</p><span class="price">$16.99</span></div>
+    <div class="menuItem"><img src="" alt="Homestyle Meatloaf"><h3>Homestyle Meatloaf</h3><p>Classic comfort with mashed potatoes.</p><span class="price">$11.99</span></div>
+  </div>
+</section>
+
+<section id="salads" class="menuSection hidden">
+  <h2>Salads</h2>
+  <div class="itemGrid">
+    <div class="menuItem"><img src="" alt="Caesar Salad"><h3>Caesar Salad</h3><p>Romaine, parmesan, and croutons.</p><span class="price">$7.99</span></div>
+    <div class="menuItem"><img src="" alt="Cobb Salad"><h3>Cobb Salad</h3><p>Chicken, bacon, egg, and avocado.</p><span class="price">$9.49</span></div>
+    <div class="menuItem"><img src="" alt="Greek Salad"><h3>Greek Salad</h3><p>Feta, olives, cucumber, and tomato.</p><span class="price">$8.49</span></div>
+    <div class="menuItem"><img src="" alt="Southwest Salad"><h3>Southwest Salad</h3><p>Spicy chicken, corn, and black beans.</p><span class="price">$9.99</span></div>
+  </div>
+</section>
+
+<section id="burgers" class="menuSection hidden">
+  <h2>Tavern Burgers</h2>
+  <div class="itemGrid">
+    <div class="menuItem"><img src="" alt="Classic Burger"><h3>Classic Burger</h3><p>Beef patty with lettuce and tomato.</p><span class="price">$9.99</span></div>
+    <div class="menuItem"><img src="" alt="Bacon Cheddar Burger"><h3>Bacon Cheddar Burger</h3><p>Loaded with crispy bacon and cheese.</p><span class="price">$10.99</span></div>
+    <div class="menuItem"><img src="" alt="Mushroom Swiss Burger"><h3>Mushroom Swiss Burger</h3><p>Sautéed mushrooms and Swiss cheese.</p><span class="price">$10.49</span></div>
+    <div class="menuItem"><img src="" alt="Spicy Inferno Burger"><h3>Spicy Inferno Burger</h3><p>Jalapeños, pepper jack, and hot sauce.</p><span class="price">$10.99</span></div>
+  </div>
+</section>
+
+<section id="veggie" class="menuSection hidden">
+  <h2>Veggie</h2>
+  <div class="itemGrid">
+    <div class="menuItem"><img src="" alt="Veggie Burger"><h3>Veggie Burger</h3><p>Black bean patty with avocado.</p><span class="price">$9.49</span></div>
+    <div class="menuItem"><img src="" alt="Stuffed Peppers"><h3>Stuffed Peppers</h3><p>Quinoa, veggies, and marinara.</p><span class="price">$8.99</span></div>
+    <div class="menuItem"><img src="" alt="Zucchini Noodles"><h3>Zucchini Noodles</h3><p>With pesto and cherry tomatoes.</p><span class="price">$8.49</span></div>
+    <div class="menuItem"><img src="" alt="Tofu Stir Fry"><h3>Tofu Stir Fry</h3><p>Mixed veggies in teriyaki sauce.</p><span class="price">$9.99</span></div>
+  </div>
+</section>
+
+<section id="family" class="menuSection hidden">
+  <h2>Family Deals</h2>
+  <div class="itemGrid">
+    <div class="menuItem"><img src="" alt="Family Pizza Pack"><h3>Family Pizza Pack</h3><p>Two large pizzas and drinks.</p><span class="price">$24.99</span></div>
+    <div class="menuItem"><img src="" alt="Chicken Bucket"><h3>Chicken Bucket</h3><p>12-piece fried chicken with sides.</p><span class="price">$22.99</span></div>
+    <div class="menuItem"><img src="" alt="Pasta Tray"><h3>Pasta Tray</h3><p>Feeds 4–6 with garlic bread.</p><span class="price">$19.99</span></div>
+    <div class="menuItem"><img src="" alt="BBQ Feast"><h3>BBQ Feast</h3><p>Ribs, brisket, and cornbread.</p><span class="price">$29.99</span></div>
+  </div>
+</section>
+
+<section id="desserts" class="menuSection hidden">
+  <h2>Desserts</h2>
+  <div class="itemGrid">
+    <div class="menuItem"><img src="" alt="Fudge Brownie"><h3>Fudge Brownie</h3><p>Rich chocolate with vanilla ice cream.</p><span class="price">$5.49</span></div>
+    <div class="menuItem"><img src="" alt="Cheesecake"><h3>Cheesecake</h3><p>Classic New York style.</p><span class="price">$5.99</span></div>
+    <div class="menuItem"><img src="" alt="Apple Pie"><h3>Apple Pie</h3><p>Warm with cinnamon and crust.</p><span class="price">$4.99</span></div>
+    <div class="menuItem"><img src="" alt="Molten Lava Cake"><h3>Molten Lava Cake</h3><p>Chocolate cake with gooey center.</p><span class="price">$5.99</span></div>
+  </div>
+</section>
+
+<section id="drinks" class="menuSection hidden">
+  <h2>Drinks</h2>
+  <div class="itemGrid">
+    <div class="menuItem"><img src="" alt="Cola"><h3>Cola</h3><p>Classic fizzy refreshment.</p><span class="price">$1.99</span></div>
+    <div class="menuItem"><img src="" alt="Lemonade"><h3>Lemonade</h3><p>Fresh-squeezed and sweet.</p><span class="price">$2.49</span></div>
+    <div class="menuItem"><img src="" alt="Iced Tea"><h3>Iced Tea</h3><p>Sweet or unsweetened options.</p><span class="price">$2.29</span></div>
+    <div class="menuItem"><img src="" alt="Milkshake"><h3>Milkshake</h3><p>Chocolate, vanilla, or strawberry.</p><span class="price">$3.99</span></div>
+  </div>
+</section>
+
+<section id="sides" class="menuSection hidden">
+  <h2>Sides</h2>
+  <div class="itemGrid">
+    <div class="menuItem"><img src="" alt="French Fries"><h3>French Fries</h3><p>Golden and crispy.</p><span class="price">$2.99</span></div>
+    <div class="menuItem"><img src="" alt="Onion Rings"><h3>Onion Rings</h3><p>Thick-cut and crunchy.</p><span class></span>
+  </section>
+ 
+
+  <section class="nutritionNotice">
+    <p>2000 calories a day is used for general nutrition advice, but calorie needs vary.</p>
+    <p class="note">*Prepared in a common kitchen alongside items containing gluten.</p>
+    <p class="note">Fried items may be prepared in the same frying oil as menu items containing animal ingredients.</p>
+  </section>
+
+  <!-- Link to JS -->
+  <script src="menu.js"></script>
+</body>
+</html>
