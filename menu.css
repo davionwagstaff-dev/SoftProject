@@ -272,3 +272,7 @@ body {
   border: none;
   border-radius: 8px;
 }
+.menuSection.disabled {
+  filter: grayscale(100%);
+  cursor: not-allowed;
+}
