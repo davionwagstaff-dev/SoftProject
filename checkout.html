@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+</style>
+</head>
+<body>
+
+<div class="checkout-container">
+<h2>Checkout</h2>
+
+<h3>Order Summary</h3>
+<div id="orderSummary"></div>
+<h3>Total: <span id="orderTotal">$0.00</span></h3>
+
+<h3>Payment Information</h3>
+
+<div class="input-group">
+<label>Full Name</label>
+<input type="text" id="fullName" placeholder="John Doe" />
+</div>
+
+<div class="input-group">
+<label>Card Number</label>
+<input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" />
+</div>
+
+<div class="input-group">
+<label>Expiration Date</label>
+<input type="text" id="expDate" placeholder="MM/YY" />
+</div>
+
+<div class="input-group">
+<label>CVC</label>
+<input type="text" id="cvc" placeholder="123" />
+</div>
+
+<button class="pay-btn" onclick="placeOrder()">Place Order</button>
+</div>
+
+
+<script>
+let cart = JSON.parse(localStorage.getItem("grillzillaCart")) || [];
+
+function loadOrder() {
+const summary = document.getElementById("orderSummary");
+const totalBox = document.getElementById("orderTotal");
+
+if (cart.length === 0) {
+summary.innerHTML = '<p class="empty-msg">Your cart is empty.</p>';
+return;
+}
+
+let total = 0;
+summary.innerHTML = "";
+
+cart.forEach(item => {
+total += item.price * item.quantity;
+
+const row = document.createElement("div");
+row.classList.add("cart-item");
+row.innerHTML = `
+<span>${item.quantity}× ${item.name}</span>
+<span>$${(item.price * item.quantity).toFixed(2)}</span>
+`;
+summary.appendChild(row);
+});
+
+totalBox.textContent = `$${total.toFixed(2)}`;
+}
+
+function placeOrder() {
+const name = document.getElementById("fullName").value;
+const card = document.getElementById("cardNumber").value;
+const exp = document.getElementById("expDate").value;
+const cvc = document.getElementById("cvc").value;
+
+if (!name || !card || !exp || !cvc) {
+alert("Please fill in all payment fields.");
+return;
+}
+
+alert("Payment successful! Your order has been placed.");
+
+// Clear cart
+localStorage.removeItem("grillzillaCart");
+window.location.href = "Menu.html";
+}
+
+loadOrder();
+</script>
+</body>
+</html>
