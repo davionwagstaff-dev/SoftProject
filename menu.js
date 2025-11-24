@@ -116,3 +116,28 @@ function checkout() {
 window.location.href = "checkout.html";
 }
 // Davion
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+  const breakfastCutoffHour = 11;
+  const now = new Date();
+  const currentHour = now.getHours();
+
+  const breakfastSection = document.getElementById("breakfast");
+
+  function disableBreakfastSection() {
+    breakfastSection.classList.add("disabled");
+    breakfastSection.style.pointerEvents = "none";
+    breakfastSection.style.opacity = "0.5";
+
+    const message = document.createElement("p");
+    message.textContent = "Breakfast is no longer available after 11:00 AM.";
+    message.style.color = "red";
+    message.style.textAlign = "center";
+    breakfastSection.appendChild(message);
+  }
+
+  if (currentHour >= breakfastCutoffHour && !breakfastSection.classList.contains("disabled")) {
+    disableBreakfastSection();
+  }
+});
