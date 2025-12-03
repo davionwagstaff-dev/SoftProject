@@ -42,6 +42,19 @@ for (let i = 0; i < rewardBag.length; i++) {
   });
 }
 
+// Display redeemed rewards on the page
+const redeemedElem = document.getElementById("redeemedRewards");
+function displayRedeemedRewards() {
+  if (!redeemedElem) return;
+  if (redeemedRewards.length === 0) {
+    redeemedElem.textContent = "You have not redeemed any rewards yet.";
+  } else {
+    redeemedElem.textContent = redeemedRewards.join(", ");
+  }
+}
+setInterval(displayRedeemedRewards, 1000);
+
+
 // need to make a function so that rewards are stored and then able to modify the cart
 
 function storeRedeemed(rewardElem) {
