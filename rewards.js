@@ -49,7 +49,7 @@ function displayRedeemedRewards() {
   if (redeemedRewards.length === 0) {
     redeemedElem.textContent = "You have not redeemed any rewards yet.";
   } else {
-    redeemedElem.textContent = "Redeemed Rewards: " + redeemedRewards.join(", ");
+    redeemedElem.textContent = redeemedRewards.join(", ");
   }
 }
 setInterval(displayRedeemedRewards, 1000);
