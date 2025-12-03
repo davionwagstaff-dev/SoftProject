@@ -64,4 +64,8 @@ function storeRedeemed(rewardElem) {
   console.log("Redeemed Rewards:", redeemedRewards);
 }
 
+// Console log to verify script is linked
+
+console.log("Rewards JS Linked Successfully");
+
 // John Costigan - Rewards JS //
