@@ -1,11 +1,14 @@
 // John Costigan - Rewards Page JS //
 
-points = 2500; // Example starting points, Later this will update with user data
+
+// Variables for points, rewards, and redeemed rewards display
+points = JSON.parse(localStorage.getItem("points")) || 2500; // Example starting points, Later this will update with user data
 const rewardBag = document.getElementsByClassName("reward");
 const pointCount = document.getElementById("pointCount")
 const rewards = Array.from(rewardBag);
-let redeemedRewards = [];
-
+let redeemedRewards = JSON.parse(localStorage.getItem("redeemedRewards")) || [];
+const redeemedElem = document.getElementById("redeemedRewards");
+ console.log(redeemedRewards);
 // Function to create reward variables
 
 function rewardFunct(index){
@@ -34,7 +37,10 @@ for (let i = 0; i < rewardBag.length; i++) {
     // Store redeemed reward
     const rewardName = reward.querySelector("h3").textContent;
     redeemedRewards.push(rewardName);
-    console.log("Redeemed Rewards:", redeemedRewards);
+    localStorage.setItem("points", JSON.stringify(points));
+    localStorage.setItem("redeemedRewards", JSON.stringify(redeemedRewards));
+    console.log("Redeemed Rewards:", JSON.stringify(redeemedRewards));
+    displayRedeemedRewards();
     }
     else {
       alert("Not enough points to redeem this reward.");
@@ -43,16 +49,17 @@ for (let i = 0; i < rewardBag.length; i++) {
 }
 
 // Display redeemed rewards on the page
-const redeemedElem = document.getElementById("redeemedRewards");
+
 function displayRedeemedRewards() {
   if (!redeemedElem) return;
   if (redeemedRewards.length === 0) {
     redeemedElem.textContent = "You have not redeemed any rewards yet.";
   } else {
-    redeemedElem.textContent = redeemedRewards.join(", ");
+    redeemedElem.textContent = "Redeemed: " + redeemedRewards.join(", ");
   }
 }
-setInterval(displayRedeemedRewards, 1000);
+displayRedeemedRewards();
+
 
 
 // need to make a function so that rewards are stored and then able to modify the cart
@@ -67,5 +74,10 @@ function storeRedeemed(rewardElem) {
 // Console log to verify script is linked
 
 console.log("Rewards JS Linked Successfully");
+
+// Interactivity with Checkout Page
+
+
+
 
 // John Costigan - Rewards JS //
