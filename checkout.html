@@ -1,90 +1,115 @@
 <!DOCTYPE html>
-</style>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grillzilla Checkout</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f4f4f4; margin:0; }
+
+    /* Navbar */
+    .navbar { display:flex; justify-content:space-between; align-items:center; padding:15px 25px; background:black; color:white; }
+    .navbar a { color:white; margin-left:15px; text-decoration:none; }
+
+    .container { max-width:1100px; margin:auto; padding:20px; }
+    .checkout-wrapper { display:flex; gap:25px; margin-top:20px; }
+
+    .card { background:white; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); flex:1; }
+    .order-item { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee; }
+    .total-row { font-weight:bold; font-size:1.2rem; margin-top:15px; }
+
+    /* Payment form */
+    label { font-weight:bold; display:block; margin-top:10px; }
+    input { width:100%; padding:10px; margin-top:5px; border-radius:8px; border:1px solid #ccc; }
+
+    .cc-logos { display:flex; gap:12px; margin-top:10px; }
+    .cc-logos img { height:32px; filter:drop-shadow(0 2px 2px rgba(0,0,0,0.2)); }
+
+    button.checkout-btn { margin-top:20px; width:100%; padding:15px; background:#1e40af; color:white; font-size:1.2rem; border:none; border-radius:10px; cursor:pointer; transition:0.3s; }
+    button.checkout-btn:hover { background:#1e3a8a; }
+
+    /* Responsive */
+    @media(max-width:768px) {
+      .checkout-wrapper { flex-direction:column; }
+    }
+  </style>
 </head>
 <body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <h2>Grillzilla</h2>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+    </div>
+  </div>
 
-<div class="checkout-container">
-<h2>Checkout</h2>
+  <div class="container">
+    <div class="checkout-wrapper">
 
-<h3>Order Summary</h3>
-<div id="orderSummary"></div>
-<h3>Total: <span id="orderTotal">$0.00</span></h3>
+      <!-- Order Summary -->
+      <div class="card" id="order-summary">
+        <h3>Your Order</h3>
+        <div id="cart-items"></div>
+        <div class="total-row">Total: $<span id="order-total">0.00</span></div>
+      </div>
 
-<h3>Payment Information</h3>
+      <!-- Payment Form -->
+      <div class="card">
+        <h3>Payment Details</h3>
 
-<div class="input-group">
-<label>Full Name</label>
-<input type="text" id="fullName" placeholder="John Doe" />
-</div>
+        <div class="cc-logos">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/American_Express_logo_%282018%29.svg" alt="Amex">
+        </div>
 
-<div class="input-group">
-<label>Card Number</label>
-<input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" />
-</div>
+        <label>Name on Card</label>
+        <input type="text" placeholder="John Doe" />
 
-<div class="input-group">
-<label>Expiration Date</label>
-<input type="text" id="expDate" placeholder="MM/YY" />
-</div>
+        <label>Card Number</label>
+        <input type="text" placeholder="1234 5678 9012 3456" />
 
-<div class="input-group">
-<label>CVC</label>
-<input type="text" id="cvc" placeholder="123" />
-</div>
+        <label>Expiration Date</label>
+        <input type="text" placeholder="MM/YY" />
 
-<button class="pay-btn" onclick="placeOrder()">Place Order</button>
-</div>
+        <label>CVV</label>
+        <input type="text" placeholder="123" />
 
+        <button class="checkout-btn" onclick="placeOrder()">Place Order</button>
+      </div>
+    </div>
+  </div>
 
-<script>
-let cart = JSON.parse(localStorage.getItem("grillzillaCart")) || [];
+  <script>
+    // Load cart from localStorage
+    const cart = JSON.parse(localStorage.getItem("grillzillaCart")) || [];
+    const cartContainer = document.getElementById("cart-items");
+    const orderTotal = document.getElementById("order-total");
 
-function loadOrder() {
-const summary = document.getElementById("orderSummary");
-const totalBox = document.getElementById("orderTotal");
+    function renderCart() {
+      cartContainer.innerHTML = "";
+      let total = 0;
 
-if (cart.length === 0) {
-summary.innerHTML = '<p class="empty-msg">Your cart is empty.</p>';
-return;
-}
+      cart.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "order-item";
+        row.innerHTML = `
+          <span>${item.name} x${item.quantity}</span>
+          <span>$${(item.price * item.quantity).toFixed(2)}</span>
+        `;
+        cartContainer.appendChild(row);
+        total += item.price * item.quantity;
+      });
 
-let total = 0;
-summary.innerHTML = "";
+      orderTotal.textContent = total.toFixed(2);
+    }
 
-cart.forEach(item => {
-total += item.price * item.quantity;
+    renderCart();
 
-const row = document.createElement("div");
-row.classList.add("cart-item");
-row.innerHTML = `
-<span>${item.quantity}× ${item.name}</span>
-<span>$${(item.price * item.quantity).toFixed(2)}</span>
-`;
-summary.appendChild(row);
-});
-
-totalBox.textContent = `$${total.toFixed(2)}`;
-}
-
-function placeOrder() {
-const name = document.getElementById("fullName").value;
-const card = document.getElementById("cardNumber").value;
-const exp = document.getElementById("expDate").value;
-const cvc = document.getElementById("cvc").value;
-
-if (!name || !card || !exp || !cvc) {
-alert("Please fill in all payment fields.");
-return;
-}
-
-alert("Payment successful! Your order has been placed.");
-
-// Clear cart
-localStorage.removeItem("grillzillaCart");
-window.location.href = "Menu.html";
-}
-
-loadOrder();
-</script>
+    function placeOrder() {
+      window.location.href = "success.html";
+    }
+  </script>
 </body>
 </html>
