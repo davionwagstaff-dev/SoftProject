@@ -51,13 +51,74 @@ for (let i = 0; i < rewardBag.length; i++) {
 // Display redeemed rewards on the page
 
 function displayRedeemedRewards() {
+  // kept for backward compatibility — now delegates to renderRedeemedList
+  renderRedeemedList();
+}
+
+// render a list with refund buttons
+function renderRedeemedList() {
   if (!redeemedElem) return;
+  redeemedElem.innerHTML = "";
+
   if (redeemedRewards.length === 0) {
     redeemedElem.textContent = "You have not redeemed any rewards yet.";
-  } else {
-    redeemedElem.textContent = "Redeemed: " + redeemedRewards.join(", ");
+    return;
   }
+
+  const ul = document.createElement("ul");
+  ul.className = "redeemed-list";
+
+  redeemedRewards.forEach((rewardName, idx) => {
+    const li = document.createElement("li");
+    li.className = "redeemed-item";
+
+    const nameSpan = document.createElement("span");
+    nameSpan.textContent = rewardName;
+    nameSpan.className = "redeemed-name";
+
+    const refundBtn = document.createElement("button");
+    refundBtn.type = "button";
+    refundBtn.textContent = "Refund";
+    refundBtn.className = "refund-btn";
+    refundBtn.dataset.index = idx;
+    refundBtn.addEventListener("click", () => refundReward(idx));
+
+    li.appendChild(nameSpan);
+    li.appendChild(document.createTextNode(" "));
+    li.appendChild(refundBtn);
+    ul.appendChild(li);
+  });
+
+  redeemedElem.appendChild(ul);
 }
+// refund by index: remove from redeemedRewards, add points back, persist, update UI
+function refundReward(index) {
+  const rewardName = redeemedRewards[index];
+  if (!rewardName) return;
+
+  // try to find the original reward element to determine cost
+  let refundAmount = 0;
+  const rewardElem = rewards.find(r => r.querySelector("h3")?.textContent === rewardName);
+  if (rewardElem) {
+    const costText = rewardElem.querySelector("p")?.textContent || "";
+    const match = costText.match(/\d+/);
+    refundAmount = match ? parseInt(match[0], 10) : 0;
+  }
+
+  // remove from array and give points back
+  redeemedRewards.splice(index, 1);
+  points = (typeof points === "number" ? points : parseInt(points, 10) || 0) + refundAmount;
+
+  // persist changes
+  localStorage.setItem("redeemedRewards", JSON.stringify(redeemedRewards));
+  localStorage.setItem("points", JSON.stringify(points));
+
+  // update UI
+  if (pointCount) pointCount.textContent = `${points}`;
+  renderRedeemedList();
+  console.log(`Refunded "${rewardName}" for ${refundAmount} points.`);
+}
+
 displayRedeemedRewards();
 
 
