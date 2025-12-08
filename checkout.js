@@ -1,5 +1,50 @@
 let cart = JSON.parse(localStorage.getItem("grillzillaCart")) || [];
 
+// cache controls
+const paymentSelect = document.getElementById("paymentMethod");
+const pickupSelect = document.getElementById("pickupOption");
+const addressGroup = document.getElementById("addressGroup");
+const cardNumGroup = document.getElementById("cardNumInput");
+const cardExpGroup = document.getElementById("cardExp");
+const cardSecGroup = document.getElementById("cardSec");
+const receiptTotal = document.getElementById("receiptTotal");
+
+// show/hide based on selections
+function updateVisibility() {
+  const pay = paymentSelect?.value || "creditCard";
+  const pickup = pickupSelect?.value || "pickup";
+
+  const showCard = pay === "creditCard";
+  cardNumGroup.style.display = showCard ? "" : "none";
+  cardExpGroup.style.display = showCard ? "" : "none";
+  cardSecGroup.style.display = showCard ? "" : "none";
+
+  const requiresAddress = pickup === "deliver";
+  addressGroup.style.display = requiresAddress ? "" : "none";
+}
+
+// ensure controls exist before wiring events
+function initUI() {
+  if (paymentSelect) paymentSelect.addEventListener("change", updateVisibility);
+  if (pickupSelect) pickupSelect.addEventListener("change", updateVisibility);
+  updateVisibility();
+}
+
+// Calculate Rewards
+function calculateRewardDiscount(rewardName) {
+  const discountMap = {
+    "Free Small Drink": 0,
+    "Free Side Order (Fries or Onion Rings)": 0,
+    "$5 Off Your Order": 5,
+    "Free Appetizer (Up to $8.99)": 0,
+    "$10 Off Your Order": 10,
+    "Free Entrée (Up to $12.99)": 0,
+    "Free Dessert + $5 Off": 5,
+    "$20 Off Your Order": 20
+  };
+  return discountMap[rewardName] || 0;
+}
+
 function loadOrder() {
 const summary = document.getElementById("orderSummary");
 const totalBox = document.getElementById("orderTotal");
@@ -24,7 +69,34 @@ row.innerHTML = `
 summary.appendChild(row);
 });
 
-totalBox.textContent = `$${total.toFixed(2)}`;
+  // Get redeemed rewards and calculate discount
+  const redeemedRewards = JSON.parse(localStorage.getItem("redeemedRewards")) || [];
+  let totalDiscount = 0;
+  redeemedRewards.forEach(reward => {
+    totalDiscount += calculateRewardDiscount(reward);
+  });
+
+  // Display subtotal, discount, and final total
+  const subtotalRow = document.createElement("div");
+  subtotalRow.classList.add("subtotal-row");
+  subtotalRow.innerHTML = `
+    <span>Subtotal</span>
+    <span>$${total.toFixed(2)}</span>
+  `;
+  summary.appendChild(subtotalRow);
+
+  if (totalDiscount > 0) {
+    const discountRow = document.createElement("div");
+    discountRow.classList.add("discount-row");
+    discountRow.innerHTML = `
+      <span>Rewards Discount</span>
+      <span>-$${totalDiscount.toFixed(2)}</span>
+    `;
+    summary.appendChild(discountRow);
+  }
+
+  const finalTotal = Math.max(0, total - totalDiscount);
+  receiptTotal.textContent = `$${finalTotal.toFixed(2)}`;
 }
 
 function generateOrderNumber() {
@@ -32,33 +104,40 @@ function generateOrderNumber() {
   }
 
 function placeOrder() {
-const name = document.getElementById("fullName").value;
-const card = document.getElementById("cardNumber").value;
-const exp = document.getElementById("expDate").value;
-const cvc = document.getElementById("cvc").value;
+  const name = document.getElementById("fullName").value.trim();
+  const paymentMethod = document.getElementById("paymentMethod").value;
+  const pickupType = document.getElementById("pickupOption").value;
 
-if (!name || !card || !exp || !cvc) {
-alert("Please fill in all payment fields.");
-return;
-}
+  // conditional fields
+  const needsAddress = pickupType === "deliver";
+  const needsCard = paymentMethod === "creditCard";
 
-  // Validate card number format (basic check)
-// if (card.length !== 16 || !/^\d{16}$/.test(card)) {
-//     alert("Card number must be 16 digits.");
-//     return;
-// }
+  const card = needsCard ? document.getElementById("cardNumber").value.trim().replace(/\s/g, "") : "";
+  const exp = needsCard ? document.getElementById("expDate").value.trim() : "";
+  const cvc = needsCard ? document.getElementById("cvc").value.trim() : "";
+  const address = needsAddress ? document.getElementById("address").value.trim() : "";
 
-  // Validate expiration date format
-if (!/^\d{2}\/\d{2}$/.test(exp)) {
-    alert("Expiration date must be in MM/YY format.");
+  // basic required checks
+  if (!name || (needsCard && (!card || !exp || !cvc)) || (needsAddress && !address)) {
+    alert("Please fill in all required payment/shipping fields.");
     return;
-}
+  }
 
-  // Validate CVC
-if (!/^\d{3,4}$/.test(cvc)) {
-    alert("CVC must be 3-4 digits.");
-    return;
-}
+  // card validation only if needed
+  if (needsCard) {
+    if (card.length !== 16 || !/^\d+$/.test(card)) {
+      alert("Card number must be 16 digits.");
+      return;
+    }
+    if (!/^\d{2}\/\d{2}$/.test(exp)) {
+      alert("Expiration date must be in MM/YY format.");
+      return;
+    }
+    if (!/^\d{3,4}$/.test(cvc)) {
+      alert("CVC must be 3-4 digits.");
+      return;
+    }
+  }
 
 console.log("Order placed by:", name);
 
@@ -119,4 +198,9 @@ alert("Payment successful! Your order has been placed.");
     window.location.href = "Menu.html";
   }
 
-loadOrder();
+  if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => { initUI(); loadOrder(); });
+} else {
+  initUI();
+  loadOrder();
+}
