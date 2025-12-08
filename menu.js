@@ -141,3 +141,6 @@ document.addEventListener("DOMContentLoaded", () => {
     disableBreakfastSection();
   }
 });
+function openCartFromNav() {
+  updateCartDisplay();
+}
