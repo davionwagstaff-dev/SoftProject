@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Login</title>
+    <style>
+        body { font-family: Arial; background:#f7f7f7; padding:30px; }
+
+        #loginBox, #managerPanel {
+            width: 350px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #0002;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        .menuRow {
+            display: flex;
+            justify-content: space-between;
+            background: #eee;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        .menuRow button { width: 60px; }
+    </style>
+</head>
+<script>
+let savedMenu = JSON.parse(localStorage.getItem("menuItems")) || [];
+
+if (savedMenu.length > 0) {
+    let section = document.querySelector(".featuredItems .itemGrid");
+
+    savedMenu.forEach(item => {
+        let div = document.createElement("div");
+        div.className = "menuItem";
+
+        div.innerHTML = `
+            <img src="https://via.placeholder.com/150">
+            <h3>${item.name}</h3>
+            <p>${item.desc}</p>
+            <span class="price">$${item.price}</span>
+        `;
+
+        section.appendChild(div);
+    });
+}
+</script>
+<body>
+
+<h2 style="text-align:center;">Manager Page</h2>
+
+<!-- LOGIN FORM -->
+<div id="loginBox">
+    <h3>Manager Login</h3>
+    <input id="managerUser" placeholder="Username">
+    <input id="managerPass" type="password" placeholder="Password">
+    <button onclick="managerLogin()">Login</button>
+    <p id="loginMsg" style="color:red;"></p>
+    <p>Go to <a href="Menu.html">Menu</a></p>
+</div>
+
+<!-- MANAGER CONTROLS -->
+<div id="managerPanel" style="display:none;">
+    <h3>Manage Menu Items</h3>
+
+    <h4>Add Item</h4>
+    <input id="addName" placeholder="Item Name">
+    <input id="addDesc" placeholder="Description">
+    <input id="addPrice" placeholder="Price">
+    <button onclick="addItem()">Add Item</button>
+
+    <h4>Current Menu</h4>
+    <div id="menuList"></div>
+</div>
+
+<script src="manager.js"></script>
+
+</body>
+</html>

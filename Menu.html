@@ -230,6 +230,27 @@
   <!-- Link to JS -->
   <script src="menu.js"></script>
   <script src="rewards.js"></script>
+<script>
+let savedMenu = JSON.parse(localStorage.getItem("menuItems")) || [];
+
+if (savedMenu.length > 0) {
+    let section = document.querySelector(".featuredItems .itemGrid");
+
+    savedMenu.forEach(item => {
+        let div = document.createElement("div");
+        div.className = "menuItem";
+
+        div.innerHTML = `
+            <img src="https://via.placeholder.com/150">
+            <h3>${item.name}</h3>
+            <p>${item.desc}</p>
+            <span class="price">$${item.price}</span>
+        `;
+
+        section.appendChild(div);
+    });
+}
+</script>
 
 </body>
 </html>
