@@ -107,9 +107,25 @@
 
     renderCart();
 
-    function placeOrder() {
-      window.location.href = "success.html";
-    }
-  </script>
+function placeOrder() {
+const name = document.getElementById("fullName").value;
+const card = document.getElementById("cardNumber").value;
+const exp = document.getElementById("expDate").value;
+const cvc = document.getElementById("cvc").value;
+
+if (!name || !card || !exp || !cvc) {
+alert("Please fill in all payment fields.");
+return;
+}
+
+alert("Payment successful! Your order has been placed.");
+
+// Clear cart
+localStorage.removeItem("grillzillaCart");
+window.location.href = "Menu.html";
+}
+
+loadOrder();
+</script>
 </body>
 </html>
