@@ -28,17 +28,28 @@ const name = item.querySelector("h3").textContent;
 const priceText = item.querySelector(".price").textContent.replace("$", "");
 const price = parseFloat(priceText);
 
-addToCart(name, price);
+// Determine category by finding parent section
+let category = "other";
+let parent = item.parentElement;
+while (parent) {
+  if (parent.classList && parent.classList.contains("menuSection")) {
+    category = parent.id || "other";
+    break;
+  }
+  parent = parent.parentElement;
+}
+
+addToCart(name, price, category);
 });
 });
 });
 
-function addToCart(name, price) {
+function addToCart(name, price, category = "other") {
 const existing = cart.find(item => item.name === name);
 if (existing) {
 existing.quantity++;
 } else {
-cart.push({ name, price, quantity: 1 });
+cart.push({ name, price, quantity: 1, category });
 }
 saveCart();
 updateCartDisplay();

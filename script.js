@@ -45,6 +45,7 @@ const title = document.getElementById("form-title");
       const storedPassword = localStorage.getItem(username);
       if (storedPassword && storedPassword === password) {
         showMessage(`Welcome, ${username}! You are logged in.`);
+        localStorage.setItem("currentUser", username);  // Store logged-in user
         window.location.href = "Menu.html" // John Costigan
       } else {
         showMessage("Invalid username or password.", true);

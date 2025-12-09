@@ -1,9 +1,22 @@
 <!DOCTYPE html>
-</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Grillzilla</title>
+    <link rel="stylesheet" href="checkout.css">
 </head>
 <body>
+    <nav class="navbar">
+    <img id="img" src="Images/ChatGPT Image Nov 6, 2025 at 08_18_14 AM.png" alt="">
+        <ul>
+            <li><a href="Menu.html">Menu</a></li>
+            <li><a href="index.html">Sign Up</a></li>
+            <li><a href="Rewards.html">Rewards</a></li>
+        </ul>
+    </nav>
 
-<div class="checkout-container">
+<div id="checkout-container">
 <h2>Checkout</h2>
 
 <h3>Order Summary</h3>
@@ -12,80 +25,80 @@
 
 <h3>Payment Information</h3>
 
-<div class="input-group">
+<div class="input-group" id="pickupType">
+    <label for="">Pickup Type</label>
+    <select id="pickupOption">
+        <option value="pickup">Pickup</option>
+        <option value="deliver">Delivery</option>
+        
+    </select>
+</div>
+
+<div class="input-group" id="payType">
+    <label for="paymentMethod">Payment Method</label>
+    <select id="paymentMethod">
+        <option value="creditCard">Credit Card</option>
+        <option value="cash">Cash</option>
+    </select>
+</div>
+
+<div class="input-group" id="name">
 <label>Full Name</label>
 <input type="text" id="fullName" placeholder="John Doe" />
 </div>
 
-<div class="input-group">
+<div class="input-group" id="addressGroup" style="display: none;">
+  <label>Delivery Address</label>
+  <input type="text" id="address" placeholder="123 Main St, City, ZIP" />
+</div>
+
+<div class="input-group" id="cardNumInput">
 <label>Card Number</label>
 <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" />
 </div>
 
-<div class="input-group">
+<div class="input-group" id="cardExp">
 <label>Expiration Date</label>
 <input type="text" id="expDate" placeholder="MM/YY" />
 </div>
 
-<div class="input-group">
+<div class="input-group" id="cardSec">
 <label>CVC</label>
 <input type="text" id="cvc" placeholder="123" />
 </div>
+
+
 
 <button class="pay-btn" onclick="placeOrder()">Place Order</button>
 </div>
 
 
-<script>
-let cart = JSON.parse(localStorage.getItem("grillzillaCart")) || [];
 
-function loadOrder() {
-const summary = document.getElementById("orderSummary");
-const totalBox = document.getElementById("orderTotal");
+<section id = receiptSection style="display: none;">
+<h2 id = "orderNumber">Order Number : N/A</h2>
+<div id="receiptDetails">
+    <h3>Order Receipt</h3>
+    <div id="receiptItems">
+        <!-- Receipt items will be populated here -->
+    </div>
+    <div id="receiptRewards">
+        <!-- Receipt rewards will be populated here -->
+    </div>
+    <h3 id="receiptTotal">Total Paid: <span id="receiptTotalAmount">$0.00</span></h3>
+</div>
+<div id="receiptThankYou">
+    <h3 id="thanks">Thank you for your order!</h3>
+    <p>Your order has been successfully placed. <br> 
+    A confirmation email has been sent to your registered email address.
+    </p>
+</div>
 
-if (cart.length === 0) {
-summary.innerHTML = '<p class="empty-msg">Your cart is empty.</p>';
-return;
-}
+</section>
 
-let total = 0;
-summary.innerHTML = "";
+<button class="return-btn" onclick="returnToMenu()">Return To Menu</button>
 
-cart.forEach(item => {
-total += item.price * item.quantity;
-
-const row = document.createElement("div");
-row.classList.add("cart-item");
-row.innerHTML = `
-<span>${item.quantity}× ${item.name}</span>
-<span>$${(item.price * item.quantity).toFixed(2)}</span>
-`;
-summary.appendChild(row);
-});
-
-totalBox.textContent = `$${total.toFixed(2)}`;
-}
-
-function placeOrder() {
-const name = document.getElementById("fullName").value;
-const card = document.getElementById("cardNumber").value;
-const exp = document.getElementById("expDate").value;
-const cvc = document.getElementById("cvc").value;
-
-if (!name || !card || !exp || !cvc) {
-alert("Please fill in all payment fields.");
-return;
-}
-
-alert("Payment successful! Your order has been placed.");
-
-// Clear cart
-localStorage.removeItem("grillzillaCart");
-window.location.href = "Menu.html";
-}
-
-loadOrder();
-</script>
+<!-- Link To JS -->
+<script src="checkout.js"></script>
 <script src="rewards.js"></script>
 </body>
 </html>
