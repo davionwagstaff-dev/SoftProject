@@ -7,7 +7,7 @@ const addressGroup = document.getElementById("addressGroup");
 const cardNumGroup = document.getElementById("cardNumInput");
 const cardExpGroup = document.getElementById("cardExp");
 const cardSecGroup = document.getElementById("cardSec");
-const receiptTotal = document.getElementById("receiptTotal");
+const receiptTotal = document.getElementById("receiptTotalAmount");
 
 // show/hide based on selections
 function updateVisibility() {
@@ -31,16 +31,17 @@ function initUI() {
 }
 
 // Calculate Rewards
+// 
 function calculateRewardDiscount(rewardName) {
   const discountMap = {
     "Free Small Drink": 0,
-    "Free Side Order (Fries or Onion Rings)": 0,
-    "$5 Off Your Order": 5,
-    "Free Appetizer (Up to $8.99)": 0,
-    "$10 Off Your Order": 10,
-    "Free Entrée (Up to $12.99)": 0,
-    "Free Dessert + $5 Off": 5,
-    "$20 Off Your Order": 20
+    "Free Side": 0,
+    "$5 Off Total Order": 5,
+    "Free Appetizer": 0,
+    "$10 Off Total Order": 10,
+    "Free Entrée": 0,
+    "Free Dessert": 0,
+    "$20 Off Total Order": 20
   };
   return discountMap[rewardName] || 0;
 }
@@ -97,6 +98,21 @@ summary.appendChild(row);
 
   const finalTotal = Math.max(0, total - totalDiscount);
   receiptTotal.textContent = `$${finalTotal.toFixed(2)}`;
+  totalBox.textContent = `$${finalTotal.toFixed(2)}`;
+}
+
+function formatCurrency(n) {
+    return '$' + Number(n).toFixed(2);
+}
+
+function updateReceiptTotal(itemsTotal, rewardsDiscount) {
+    const discount = Number(rewardsDiscount) || 0;
+    const subtotal = Number(itemsTotal) || 0;
+    const finalTotal = Math.max(0, subtotal - discount); // don't go negative
+    document.getElementById('receiptTotalAmount').textContent = formatCurrency(finalTotal);
+    // if you also show orderTotal elsewhere, update that too:
+    const orderTotalEl = document.getElementById('orderTotal');
+    if (orderTotalEl) orderTotalEl.textContent = formatCurrency(finalTotal);
 }
 
 function generateOrderNumber() {
@@ -144,55 +160,154 @@ console.log("Order placed by:", name);
 alert("Payment successful! Your order has been placed.");
 
 // Generate receipt
-    const orderNumber = generateOrderNumber();
-    displayReceipt(orderNumber, name);
+const orderNumber = generateOrderNumber();
+// Save cart before clearing for receipt display
+const cartForReceipt = JSON.parse(localStorage.getItem("grillzillaCart")) || cart;
+displayReceipt(orderNumber, cartForReceipt);
 
-    // Hide checkout form, show receipt
-    document.getElementById("checkout-container").style.display = "none";
-    document.getElementById("receiptSection").style.display = "block";
+// Calculate total spent for points
+let totalSpent = 0;
+cartForReceipt.forEach(item => {
+  totalSpent += item.price * item.quantity;
+});
 
-    // Clear cart (but keep it for receipt display)
-    localStorage.removeItem("grillzillaCart");
-    cart = []; // Clear in-memory cart
+// Add points based on spending (10 points per $1, or 1 point per $0.10)
+const currentUser = localStorage.getItem("currentUser");
+if (currentUser) {
+  const currentPoints = JSON.parse(localStorage.getItem("points")) || 0;
+  const pointsEarned = Math.floor(totalSpent * 10);
+  const newPoints = currentPoints + pointsEarned;
+  localStorage.setItem("points", JSON.stringify(newPoints));
+  console.log(`Added ${pointsEarned} points. Total: ${newPoints}`);
+}
+
+// Clear redeemed rewards after order completes
+localStorage.removeItem("redeemedRewards");
+
+// Hide checkout form, show receipt
+document.getElementById("checkout-container").style.display = "none";
+document.getElementById("receiptSection").style.display = "block";
+
+// Clear cart after receipt is built
+localStorage.removeItem("grillzillaCart");
+cart = []; // Clear in-memory cart
+}
+
+function displayReceipt(orderNumber, cartData) {
+const receiptItems = document.getElementById("receiptItems");
+const receiptTotalAmountSpan = document.getElementById("receiptTotalAmount");
+const orderNumberSpan = document.getElementById("orderNumber");
+const receiptRewards = document.getElementById("receiptRewards");
+
+console.log("displayReceipt called with:", { orderNumber, cartData });
+
+orderNumberSpan.textContent = orderNumber;
+receiptItems.innerHTML = "";
+
+// Check if user is logged in
+const currentUser = localStorage.getItem("currentUser");
+const isLoggedIn = !!currentUser;
+
+console.log("User logged in:", currentUser);
+
+// Get redeemed rewards to apply free item discounts (only if logged in)
+const redeemedRewards = isLoggedIn ? (JSON.parse(localStorage.getItem("redeemedRewards")) || []) : [];
+console.log("Redeemed rewards from storage:", redeemedRewards);
+
+// Map free item rewards to item names/types they apply to
+const freeItemMap = {
+  "Free Small Drink": "drinks",  // Match drinks section
+  "Free Side": "sides",           // Match sides section
+  "Free Appetizer": "appetizers", // Match appetizers section
+  "Free Entrée": "entrees",       // Match entrees section
+  "Free Dessert": "desserts"      // Match desserts section
+};
+
+// Count how many of each free reward we have
+const freeRewardCounts = {};
+redeemedRewards.forEach(reward => {
+  if (freeItemMap[reward]) {
+    freeRewardCounts[reward] = (freeRewardCounts[reward] || 0) + 1;
   }
+});
 
-  function displayReceipt(orderNumber, customerName) {
-    const receiptItems = document.getElementById("receiptItems");
-    const receiptTotal = document.getElementById("receiptTotal");
-    const orderNumberSpan = document.getElementById("orderNumber");
-    const receiptRewards = document.getElementById("receiptRewards");
+console.log("Free reward counts:", freeRewardCounts);
 
-    orderNumberSpan.textContent = orderNumber;
-    receiptItems.innerHTML = "";
+let total = 0;
+const savedCart = cartData || [];
 
-    let total = 0;
-    const savedCart = JSON.parse(localStorage.getItem("grillzillaCart")) || cart;
+console.log("Cart data in receipt:", savedCart);
 
-    savedCart.forEach(item => {
-      total += item.price * item.quantity;
-
-      const row = document.createElement("div");
-      row.classList.add("receipt-item");
-      row.innerHTML = `
-        <span>${item.quantity}× ${item.name}</span>
-        <span>$${(item.price * item.quantity).toFixed(2)}</span>
-      `;
-      receiptItems.appendChild(row);
-    });
-
-    receiptTotal.textContent = `$${total.toFixed(2)}`;
-
-    // Display redeemed rewards
-    const redeemedRewards = JSON.parse(localStorage.getItem("redeemedRewards")) || [];
-    if (redeemedRewards.length > 0) {
-      receiptRewards.innerHTML = `
-        <h3>Redeemed Rewards:</h3>
-        <ul>
-          ${redeemedRewards.map(reward => `<li>${reward}</li>`).join("")}
-        </ul>
-      `;
+// Process cart items, zeroing out ONE free item per reward type
+savedCart.forEach(item => {
+  let itemPrice = item.price;
+  let quantityToCharge = item.quantity;
+  
+  // Check if this item should have a free instance based on redeemed rewards
+  if (item.category) {
+    for (const [reward, category] of Object.entries(freeItemMap)) {
+      if (item.category === category && freeRewardCounts[reward] > 0) {
+        // Only make ONE item free, charge for the rest
+        quantityToCharge = item.quantity - 1;
+        freeRewardCounts[reward]--;  // Use up one reward
+        console.log("Applied free reward to one instance of:", item.name);
+        break;
+      }
     }
   }
+  
+  total += itemPrice * quantityToCharge;
+
+  const row = document.createElement("div");
+  row.classList.add("receipt-item");
+  
+  // Show quantity breakdown if a free item was applied
+  if (quantityToCharge < item.quantity) {
+    row.innerHTML = `
+      <span>${item.quantity}× ${item.name} (1 free)</span>
+      <span>$${(itemPrice * quantityToCharge).toFixed(2)}</span>
+    `;
+  } else {
+    row.innerHTML = `
+      <span>${item.quantity}× ${item.name}</span>
+      <span>$${(itemPrice * quantityToCharge).toFixed(2)}</span>
+    `;
+  }
+  receiptItems.appendChild(row);
+});
+
+console.log("Subtotal after free items:", total);
+
+// Calculate remaining dollar-amount discounts
+let totalDiscount = 0;
+if (redeemedRewards.length > 0) {
+  totalDiscount = redeemedRewards.reduce((acc, r) => acc + calculateRewardDiscount(r), 0);
+  console.log("Total discount calculated:", totalDiscount);
+  
+  receiptRewards.innerHTML = `
+    <h3>Redeemed Rewards:</h3>
+    <ul>
+      ${redeemedRewards.map(reward => `<li>${reward}</li>`).join("")}
+    </ul>
+  `;
+} else {
+  receiptRewards.innerHTML = "";
+}
+
+const finalTotal = Math.max(0, total - totalDiscount);
+
+console.log("Final total:", finalTotal, "(" + total + " - " + totalDiscount + ")");
+
+// Update receipt display: keep the label, update the amount span
+if (receiptTotalAmountSpan) {
+  receiptTotalAmountSpan.textContent = `$${finalTotal.toFixed(2)}`;
+  console.log("Updated receiptTotalAmountSpan to:", `$${finalTotal.toFixed(2)}`);
+}
+
+// Also update the checkout page's order total if present
+const orderTotalEl = document.getElementById('orderTotal');
+if (orderTotalEl) orderTotalEl.textContent = `$${finalTotal.toFixed(2)}`;
+}
 
   function returnToMenu() {
     window.location.href = "Menu.html";
