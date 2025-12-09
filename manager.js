@@ -113,7 +113,7 @@ function goToMenu() {
     window.location.href = "Menu.html";
 }
 
-// Display menu on Menu.html
+// Display item on Menu
 document.addEventListener("DOMContentLoaded", () => {
     let savedMenu = JSON.parse(localStorage.getItem("menuItems")) || [];
     let section = document.querySelector(".featuredItems .itemGrid");
