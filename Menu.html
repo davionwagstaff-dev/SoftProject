@@ -231,9 +231,11 @@
   <script src="menu.js"></script>
   <script src="rewards.js"></script>
   <script src="checkout.js"></script>
+  <script src="manager.js"></script>
 <script>
 // Load custom menu items from localStorage and inject into sections
 let customMenuItems = JSON.parse(localStorage.getItem("menuItems")) || [];
+let placeholder = "https://via.placeholder.com/300x200?text=No+Image";
 
 customMenuItems.forEach(item => {
     // Find the correct section based on category
@@ -253,8 +255,11 @@ customMenuItems.forEach(item => {
     // Create menu item element
     let div = document.createElement("div");
     div.className = "menuItem";
+
+    const imgSrc = (item.img || "").trim();
+
     div.innerHTML = `
-        <img src="" alt="${item.name}">
+        <img src="${item.image}" alt="${item.name}">
         <h3>${item.name}</h3>
         <p>${item.desc || "No description available"}</p>
         <span class="price">$${parseFloat(item.price).toFixed(2)}</span>
