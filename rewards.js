@@ -22,9 +22,11 @@ if (!isLoggedIn) {
   const pointsection = document.getElementById("pointSection");
   const redeemedSection = document.getElementById("redeemedSection");
   const rewardheader = document.getElementById("rewardHead");
+  const rewardfooter = document.getElementById("rewardFooter");
   rewardsSection.style.display = "none";
   pointsection.style.display = "none";
   redeemedSection.style.display = "none";
+  rewardfooter.style.display = "none";
   rewardheader.textContent = "Please log in to view and redeem rewards.";
 }
 else {
