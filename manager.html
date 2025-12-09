@@ -16,7 +16,7 @@
             box-shadow: 0 0 10px #0002;
         }
 
-        input, button {
+        input, button, select {
             width: 100%;
             padding: 10px;
             margin: 8px 0;
@@ -32,29 +32,18 @@
         }
 
         .menuRow button { width: 60px; }
+
+        #previewImage {
+            width: 100px;
+            height: 100px;
+            display: block;
+            margin-top: 5px;
+            border-radius: 5px;
+            object-fit: cover;
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
-<script>
-let savedMenu = JSON.parse(localStorage.getItem("menuItems")) || [];
-
-if (savedMenu.length > 0) {
-    let section = document.querySelector(".featuredItems .itemGrid");
-
-    savedMenu.forEach(item => {
-        let div = document.createElement("div");
-        div.className = "menuItem";
-
-        div.innerHTML = `
-            <img src="https://via.placeholder.com/150">
-            <h3>${item.name}</h3>
-            <p>${item.desc}</p>
-            <span class="price">$${item.price}</span>
-        `;
-
-        section.appendChild(div);
-    });
-}
-</script>
 <body>
 
 <h2 style="text-align:center;">Manager Page</h2>
@@ -94,6 +83,11 @@ if (savedMenu.length > 0) {
         <option value="seafood">Seafood</option>
         <option value="bbq">BBQ Specials</option>
     </select>
+
+    <!-- Image URL Input -->
+    <input id="addImageUrl" placeholder="Image URL (e.g. https://...jpg)">
+    <img id="previewImage" src="https://via.placeholder.com/150" alt="Preview">
+
     <button onclick="addItem()">Add Item</button>
 
     <h4>Current Menu</h4>
@@ -102,6 +96,7 @@ if (savedMenu.length > 0) {
     <button onclick="goToMenu()" style="margin-top: 20px; background: #4CAF50; color: white;">Go to Menu</button>
 </div>
 
+<!-- External JS File -->
 <script src="manager.js"></script>
 
 </body>
