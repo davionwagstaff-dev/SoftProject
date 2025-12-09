@@ -164,4 +164,6 @@ button {
 #receiptSection {
     background: #fff;
     max-width: 650px;
+    padding: 2%;
+    margin: auto;
 }

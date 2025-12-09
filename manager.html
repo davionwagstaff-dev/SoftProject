@@ -77,10 +77,29 @@ if (savedMenu.length > 0) {
     <input id="addName" placeholder="Item Name">
     <input id="addDesc" placeholder="Description">
     <input id="addPrice" placeholder="Price">
+    <select id="addCategory">
+        <option value="appetizers">Appetizers</option>
+        <option value="breakfast">Breakfast</option>
+        <option value="kids">Kids</option>
+        <option value="family">Family Deals</option>
+        <option value="wings">Chicken Wings</option>
+        <option value="entrees">Entrées</option>
+        <option value="salads">Salads</option>
+        <option value="burgers">Tavern Burgers</option>
+        <option value="veggie">Veggie</option>
+        <option value="desserts">Desserts</option>
+        <option value="drinks">Drinks</option>
+        <option value="sides">Sides</option>
+        <option value="soups">Soups</option>
+        <option value="seafood">Seafood</option>
+        <option value="bbq">BBQ Specials</option>
+    </select>
     <button onclick="addItem()">Add Item</button>
 
     <h4>Current Menu</h4>
     <div id="menuList"></div>
+
+    <button onclick="goToMenu()" style="margin-top: 20px; background: #4CAF50; color: white;">Go to Menu</button>
 </div>
 
 <script src="manager.js"></script>

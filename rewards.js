@@ -2,14 +2,35 @@
 
 
 // Variables for points, rewards, and redeemed rewards display
-points = JSON.parse(localStorage.getItem("points")) || 2500; // Example starting points, Later this will update with user data
+points = JSON.parse(localStorage.getItem("points")) || 500
 const rewardBag = document.getElementsByClassName("reward");
 const pointCount = document.getElementById("pointCount")
 const rewards = Array.from(rewardBag);
 let redeemedRewards = JSON.parse(localStorage.getItem("redeemedRewards")) || [];
 const redeemedElem = document.getElementById("redeemedRewards");
  console.log(redeemedRewards);
-// Function to create reward variables
+
+// Check if user is logged in
+const currentUser = localStorage.getItem("currentUser");
+const isLoggedIn = !!currentUser;
+
+console.log("User logged in:", currentUser);
+
+// If not logged in, hide points and rewards section
+if (!isLoggedIn) {
+  const rewardsSection = document.getElementById("rewardChoices");
+  const pointsection = document.getElementById("pointSection");
+  const redeemedSection = document.getElementById("redeemedSection");
+  const rewardheader = document.getElementById("rewardHead");
+  rewardsSection.style.display = "none";
+  pointsection.style.display = "none";
+  redeemedSection.style.display = "none";
+  rewardheader.textContent = "Please log in to view and redeem rewards.";
+}
+else {
+  const rewardsDescription = document.getElementById("callAction");
+  rewardsDescription.style.display = "none";
+}
 
 function rewardFunct(index){
   return rewards[index] || null;

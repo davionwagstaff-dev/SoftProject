@@ -50,6 +50,9 @@ body {
     color: #333; 
 }
 /* Rewards Page CSS - Jack Costigan */
+ul {
+    list-style-type: none;
+}
 #rewardsHeader {
     display: flex;
     background-color: black;
@@ -65,9 +68,11 @@ body {
     font-size: 1.5em;
     padding: 20px;
     width: 80%;
-    margin: auto;
+    max-width: 800px;
+    margin: 80px auto 20px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+    text-align: center;
 }
 #rewardsDesc p{
     margin-top: 15px;
@@ -89,10 +94,10 @@ body {
 }
 #rewardChoices{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    width: 90%;
-    flex-wrap: wrap;
+    width: 95%;
+    max-width: 1400px;
     margin: 20px auto;
     text-align: center;
     justify-items: center;
@@ -127,6 +132,8 @@ body {
     bottom: 0;
     width: 100%;
     margin-top: 2%;
+    position: fixed;
+    height: 100px;
 }
 /* Cart CSS */
 .cartBox {

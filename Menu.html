@@ -177,7 +177,7 @@
   <h2>Sides</h2>
   <div class="itemGrid">
     <div class="menuItem"><img src="https://th.bing.com/th/id/R.6e3c087dbca4d57f45bc5aba20c80700?rik=2SeYkY5CGC%2fj%2bA&pid=ImgRaw&r=0" alt="French Fries"><h3>French Fries</h3><p>Golden and crispy.</p><span class="price">$2.99</span></div>
-    <div class="menuItem"><img src="https://recipesnow.com/wp-content/uploads/2018/02/French-Fried-Onion-Rings-500x281.jpg" alt="Onion Rings"><h3>Onion Rings</h3><p>Thick-cut and crunchy.</p><span class></span>
+    <div class="menuItem"><img src="https://recipesnow.com/wp-content/uploads/2018/02/French-Fried-Onion-Rings-500x281.jpg" alt="Onion Rings"><h3>Onion Rings</h3><p>Thick-cut and crunchy.</p><span class="price">$2.99</span>
   </section>
 
   <section id="soups" class="menuSection hidden">
@@ -230,26 +230,38 @@
   <!-- Link to JS -->
   <script src="menu.js"></script>
   <script src="rewards.js"></script>
+  <script src="checkout.js"></script>
 <script>
-let savedMenu = JSON.parse(localStorage.getItem("menuItems")) || [];
+// Load custom menu items from localStorage and inject into sections
+let customMenuItems = JSON.parse(localStorage.getItem("menuItems")) || [];
 
-if (savedMenu.length > 0) {
-    let section = document.querySelector(".featuredItems .itemGrid");
+customMenuItems.forEach(item => {
+    // Find the correct section based on category
+    const section = document.getElementById(item.category);
+    if (!section) {
+        console.warn(`Section with id "${item.category}" not found`);
+        return;
+    }
 
-    savedMenu.forEach(item => {
-        let div = document.createElement("div");
-        div.className = "menuItem";
+    // Find the itemGrid within that section
+    const itemGrid = section.querySelector(".itemGrid");
+    if (!itemGrid) {
+        console.warn(`itemGrid not found in section "${item.category}"`);
+        return;
+    }
 
-        div.innerHTML = `
-            <img src="https://via.placeholder.com/150">
-            <h3>${item.name}</h3>
-            <p>${item.desc}</p>
-            <span class="price">$${item.price}</span>
-        `;
+    // Create menu item element
+    let div = document.createElement("div");
+    div.className = "menuItem";
+    div.innerHTML = `
+        <img src="" alt="${item.name}">
+        <h3>${item.name}</h3>
+        <p>${item.desc || "No description available"}</p>
+        <span class="price">$${parseFloat(item.price).toFixed(2)}</span>
+    `;
 
-        section.appendChild(div);
-    });
-}
+    itemGrid.appendChild(div);
+});
 </script>
 
 </body>
