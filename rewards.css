@@ -126,14 +126,12 @@ ul {
 }
 #rewardFooter {
     background-color: black;
-    color: white;
     text-align: center;
-    padding: 10px 0;
-    bottom: 0;
-    width: 100%;
-    margin-top: 2%;
-    position: fixed;
-    height: 100px;
+  padding: 2rem;
+  background: black;
+  border-top: 2px solid black;
+  font-size: 0.9rem;
+  color: #fff;
 }
 /* Cart CSS */
 .cartBox {
