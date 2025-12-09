@@ -5,7 +5,11 @@
     box-sizing: border-box;
 }
 body {
-    background: linear-gradient(to  right, #333,#00c6ff, #0078ff);
+    background: linear-gradient(to right, #333,#00c6ff, #0078ff);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 /* --- Navigation Bar Styling --- */
 .navbar {
@@ -102,6 +106,7 @@ ul {
     text-align: center;
     justify-items: center;
     align-items: center;
+    flex: 1 0 auto;
 }
 .reward{
     display: block;
@@ -127,11 +132,13 @@ ul {
 #rewardFooter {
     background-color: black;
     text-align: center;
-  padding: 2rem;
-  background: black;
-  border-top: 2px solid black;
-  font-size: 0.9rem;
-  color: #fff;
+    padding: 2rem;
+    background: black;
+    border-top: 2px solid black;
+    font-size: 0.9rem;
+    color: #fff;
+    margin-top: auto;
+    position: relative;
 }
 /* Cart CSS */
 .cartBox {
